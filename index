@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WSEW秋 2026 現場メモ｜OKITAMA</title>
+<style>
+  :root{
+    --ink:#1c1f1d;
+    --ink-2:#565c58;
+    --ink-3:#8a918c;
+    --line:#d9ddd9;
+    --paper:#fbfbf8;
+    --green:#1f5a3a;
+    --green-soft:#e6efe8;
+    --star:#b8862b;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    font-size:15px;line-height:1.55;
+    padding-bottom:calc(40px + env(safe-area-inset-bottom));
+  }
+  header{
+    padding:calc(14px + env(safe-area-inset-top)) 18px 10px;
+  }
+  header h1{
+    margin:0;font-size:20px;font-weight:700;letter-spacing:.01em;
+  }
+  header p{margin:4px 0 0;color:var(--ink-2);font-size:13px}
+  .opener{
+    margin:0 18px 6px;padding:12px 14px;
+    background:var(--green-soft);border-left:3px solid var(--green);
+    font-size:14px;
+  }
+  .opener strong{display:block;margin-bottom:4px;font-size:13px;color:var(--green)}
+  .opener ol{margin:4px 0 0;padding-left:20px}
+  .opener li{margin:2px 0}
+
+  nav{
+    position:sticky;top:0;z-index:5;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:8px 12px;
+    display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav button{
+    flex:0 0 auto;appearance:none;border:1px solid var(--line);background:#fff;
+    color:var(--ink-2);border-radius:999px;padding:7px 12px;font-size:13px;
+    font-family:inherit;
+  }
+  nav button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  nav button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+  section{padding:6px 0 4px}
+  section.hidden{display:none}
+  .sec-head{
+    display:flex;align-items:baseline;gap:10px;
+    padding:14px 18px 6px;
+  }
+  .sec-head h2{
+    margin:0;font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.01em;
+  }
+  .sec-head span{color:var(--ink-3);font-size:13px}
+  .sec-note{margin:0 18px 6px;color:var(--ink-2);font-size:13px}
+
+  .co{
+    display:grid;grid-template-columns:32px 1fr;gap:0 10px;
+    padding:12px 18px 12px 14px;border-top:1px solid var(--line);
+  }
+  .co:last-child{border-bottom:1px solid var(--line)}
+  .co.done .body{opacity:.4}
+  .co.done .name{text-decoration:line-through}
+  .chk{
+    grid-row:1 / span 3;align-self:start;margin-top:2px;
+    width:26px;height:26px;border:1.5px solid var(--ink-3);border-radius:6px;
+    background:#fff;appearance:none;-webkit-appearance:none;position:relative;
+  }
+  .chk:checked{background:var(--green);border-color:var(--green)}
+  .chk:checked::after{
+    content:"";position:absolute;left:8px;top:3px;width:7px;height:13px;
+    border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);
+  }
+  .chk:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .name{font-size:16px;font-weight:700}
+  .name .s{color:var(--star);font-size:14px;margin-left:2px}
+  .zone{font-size:12px;color:var(--ink-3);white-space:nowrap}
+  .body{grid-column:2}
+  .why{margin:2px 0 0;color:var(--ink-2);font-size:14px}
+  .ask{margin:6px 0 0;font-size:14px;padding-left:10px;border-left:2px solid var(--green)}
+  .ask::before{content:"聞く：";color:var(--green);font-weight:700}
+  .booth{
+    grid-column:2;margin-top:8px;display:flex;align-items:center;gap:8px;
+  }
+  .booth label{font-size:12px;color:var(--ink-3);white-space:nowrap}
+  .booth input{
+    width:110px;border:1px solid var(--line);border-radius:6px;padding:6px 8px;
+    font-size:14px;font-family:inherit;background:#fff;color:var(--ink);
+  }
+  .booth input:focus-visible{outline:2px solid var(--green);outline-offset:1px}
+
+  .caveat{
+    margin:18px 18px 0;color:var(--ink-3);font-size:12px;line-height:1.6;
+  }
+  .count{
+    position:fixed;left:0;right:0;bottom:0;
+    background:var(--ink);color:#fff;font-size:13px;
+    padding:9px 18px calc(9px + env(safe-area-inset-bottom));
+    display:flex;justify-content:space-between;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .co .body{transition:opacity .15s}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>WSEW秋 2026 現場メモ</h1>
+  <p>9/9〜11 幕張メッセ ｜ OKITAMA・先行トレンド枠 ｜ ★＝代替の効かない相手</p>
+</header>
+
+<div class="opener">
+  <strong>最初の一言と、共通の3問</strong>
+  「福島・山形で27〜30サイト運営している発電事業者です」
+  <ol>
+    <li>御社にとって一番早い顧客はどういう会社か</li>
+    <li>日本で最初の案件は、いつ・どこで動くか</li>
+    <li>土地と系統接続を持つ事業者と組む余地はあるか</li>
+  </ol>
+</div>
+
+<nav aria-label="行為で絞る">
+  <button aria-pressed="true" data-f="all">すべて</button>
+  <button aria-pressed="false" data-f="price">値付けを聞く</button>
+  <button aria-pressed="false" data-f="ins">保険料に翻訳</button>
+  <button aria-pressed="false" data-f="std">標準解を確かめる</button>
+  <button aria-pressed="false" data-f="model">型を借りる</button>
+  <button aria-pressed="false" data-f="forest">森林を測る</button>
+  <button aria-pressed="false" data-f="story">物語を検証可能に</button>
+  <button aria-pressed="false" data-f="know">知見を借りる</button>
+  <button aria-pressed="false" data-f="scout">先を偵察する</button>
+</nav>
+
+<!-- ① -->
+<section data-f="price">
+  <div class="sec-head"><h2>値付けを聞く</h2><span>証書に載らない価値に、市場は値をつけるか</span></div>
+  <p class="sec-note">脱炭素経営EXPOの3社は1社20分で十分。全部回らない。</p>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">enechain<span class="s">★</span></span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">電力取引プラットフォーム。証書と電力の値付けが実務でどう分離されているかを、市場運営側から聞ける唯一の相手。</p>
+    <p class="ask">時間単位のマッチングに価値がつく取引は実在するか。同コマ内の時間内市場の流動性は。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Carbon EX</span><span class="zone">PV EXPO</span></div>
+    <div class="body"><p class="why">カーボンクレジット取引。証書を「床値」として扱う設計の妥当性を市場側から検証。</p>
+    <p class="ask">地域限定・時間帯保証の付加価値に価格がついた実例はあるか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Sustech ／ ゼロボード ／ アスエネ</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">需要家がどの粒度の環境価値を求めているか。買い手の要求仕様を知る場。どれか1社でよい。</p>
+    <p class="ask">顧客が「地域産・時間帯指定」の再エネに追加で払った例はあるか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">日本カーボンマネジメント ／ リクロマ</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">同上、ニッチ側。時間が余ったら。</p>
+    <p class="ask">同上。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ② -->
+<section data-f="ins">
+  <div class="sec-head"><h2>保険料に翻訳する</h2><span>レジリエンス価値の下限値を数字で取る</span></div>
+  <p class="sec-note">3社ともSCM Worldに集中。まとめて回る。</p>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">SOMPOリスクマネジメント<span class="s">★</span></span><span class="zone">SCM World</span></div>
+    <div class="body"><p class="why">レジリエンスを既に貨幣換算している唯一の業界＝損保。今回1社だけ選ぶならここ。</p>
+    <p class="ask">地域内で電源を確保している事業所の保険料は下がるか。下がらないなら、なぜ評価されないのか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Spectee</span><span class="zone">SCM World</span></div>
+    <div class="body"><p class="why">実時間の災害・リスク情報AI。停電・災害の発生実績データを持つ。レジリエンス価値の根拠データ源。</p>
+    <p class="ask">地域単位の停電・災害履歴データを事業者に提供できるか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Resilire</span><span class="zone">SCM World</span></div>
+    <div class="body"><p class="why">サプライチェーン途絶リスクの可視化。需要家がどのリスクに金を払っているかが分かる。</p>
+    <p class="ask">顧客が「電力途絶」をリスク項目として管理している比率は。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ③ -->
+<section data-f="std">
+  <div class="sec-head"><h2>標準解を確かめる</h2><span>Orchestratorの差分を言語化する</span></div>
+  <p class="sec-note">買わない。「インバランスをどう扱うか」と聞き、全社が「最小化」と答えることを確認する。</p>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">オーロラ・エナジー・リサーチ<span class="s">★</span></span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">卸価格見通しの専門機関。日別推定が依拠する外部前提として、実務で何が使われているか。OKITAMAで最も実用度が高い。</p>
+    <p class="ask">時間内市場の流動性見通し。FIP収益試算に使える価格カーブの提供形態。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">グリッドビヨンド</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">アグリゲーションのAI制御。インバランス回避側の標準実装。逆設計の妥当性を測る鏡。</p>
+    <p class="ask">御社のシステムはインバランスをどう扱うか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Tensor Energy</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">FIP運用の収益最適化。コマ単位のポジション管理をどうUIに落としているか。画面設計の参考。</p>
+    <p class="ask">ポジション画面を実機で見せてほしい。インバランスの扱いは。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">リミックスポイント ／ ENEOS Power</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">小売側の需給運用の実情。時間があれば。</p>
+    <p class="ask">同上。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ④ -->
+<section data-f="model">
+  <div class="sec-head"><h2>型を借りる</h2><span>自治体・地域金融・地域需要家の完成形</span></div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">岩手県八幡平市<span class="s">★</span></span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">自治体が単独ブース。地域エネルギーへの行政の関与のさせ方を当事者から聞ける。置賜の制度設計の型紙。</p>
+    <p class="ask">市はどの立場で関与しているか（出資・条例・需要家・調整役）。始めたときの最初の壁は。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">肥後銀行</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">地銀が単独出展。地域金融が地域エネルギーに何を期待し、どう関与しているか。他地域の完成形。</p>
+    <p class="ask">地域電力への融資・出資で、何を審査指標にしているか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">アイ・グリッド・ソリューションズ</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">分散電源のAI需要予測とPPA。「内で回す」構造の商用実装例。</p>
+    <p class="ask">需要家群を束ねるときの最小ロットと契約形態。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">エナーバンク ／ グリーンエナジー＆カンパニー</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">地域電力の需要家開拓の実務。</p>
+    <p class="ask">中小需要家の獲得単価と離脱率。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">省エネお助け隊（特別企画）</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">中小企業の省エネを支える地域密着型の支援団体。置賜の中小需要家をどう束ねるかの実装ノウハウ。</p>
+    <p class="ask">山形・置賜エリアで活動している団体はどこか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ⑤ -->
+<section data-f="forest">
+  <div class="sec-head"><h2>森林を測る</h2><span>面積ではなく炭素量・保水量で語る</span></div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">国際航業</span><span class="zone">PV EXPO</span></div>
+    <div class="body"><p class="why">空間情報。森林資源量・地形のリモートセンシング解析を本業に持つ。なぜ太陽光展にいるかを聞く。</p>
+    <p class="ask">森林の炭素蓄積量・保水機能を面的に定量化できるか。単価感。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">バイオマスリサーチ</span><span class="zone">H2 &amp; FC EXPO</span></div>
+    <div class="body"><p class="why">森林・林地残材の事業化。置賜の森林を「保全対象」から「資源」に読み替える経路。ゾーンが離れているので順路に注意。</p>
+    <p class="ask">森林組合と組んだ事業の実例。残材の集荷半径と採算ライン。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ⑥ -->
+<section data-f="story">
+  <div class="sec-head"><h2>物語を検証可能にする</h2><span>当たれば大きい。外れたら5分で離脱</span></div>
+  <p class="sec-note">この枠は社名と出展区画からの推定を含む。実態が違えば即離脱。</p>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">digglue</span><span class="zone">サーキュラー・エコノミーEXPO</span></div>
+    <div class="body"><p class="why">資源循環のトレーサビリティ。「どこから来たか」の証明装置。電力・森林の由来証明に横展開できる構造。</p>
+    <p class="ask">電力や環境価値の由来証明に技術を転用した例はあるか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">WHERE</span><span class="zone">PV EXPO</span></div>
+    <div class="body"><p class="why">地域発信・地域創生の文脈を持つ社名でPV展に出ている点が異質。実態は要確認。</p>
+    <p class="ask">何を出展しているのか。地域エネルギーの発信で関わった事例は。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">宣伝会議</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">出版・広告の会社がスマートグリッド展にいる。エネルギーの物語をどう売るかを、業界の外の言語で聞ける。</p>
+    <p class="ask">エネルギー事業者のブランディングで、効いた事例と効かなかった事例。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">LobbyAI</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">社名から政策・規制動向のAI解析と推測（未確認）。内外差の「制度」次元を扱う相手。</p>
+    <p class="ask">実際に何をするサービスか。電力制度の変更をどのくらい先行して察知できるか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ⑦ -->
+<section data-f="know">
+  <div class="sec-head"><h2>知見を借りる</h2><span>単独担当者の暗黙知に、比較対象を作る</span></div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">ビザスク</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">スポットコンサル。他社の需給運用担当者に1時間だけ話を聞ける。競合に直接聞かずに運用の妥当性を検証できる。</p>
+    <p class="ask">新電力の需給運用経験者は登録されているか。1時間の相場。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<!-- ⑧ -->
+<section data-f="scout">
+  <div class="sec-head"><h2>先を偵察する</h2><span>2035年以降、電気を何に変換して売るか</span></div>
+  <p class="sec-note">時間が余ったら。買わない。時間軸と最初の顧客だけ聞く。</p>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Canaan INC.</span><span class="zone">SMART GRID EXPO</span></div>
+    <div class="body"><p class="why">計算機メーカーがスマートグリッド展に出ている。余剰電力を計算に変換する＝可制御負荷としての立地。電力→計算の本命。</p>
+    <p class="ask">発電所併設の計算設備で、日本での最初の案件はいつ・どこか。必要な電源規模。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Green AI</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">社名の通りの領域か、実態を確認する。</p>
+    <p class="ask">何をするサービスか。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">NTTアノードエナジー ／ NTTファシリティーズ</span><span class="zone">脱炭素経営EXPO</span></div>
+    <div class="body"><p class="why">DC側の要件を聞き出す先。売り込まず要件ヒアリングとして使う。</p>
+    <p class="ask">東北で再エネ併設DCを検討するとき、電源に求める規模・品質・立地条件。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">NGK ／ ヒートポンプ・蓄熱センター</span><span class="zone">熱エネルギー展（初開催）</span></div>
+    <div class="body"><p class="why">電気を熱として貯める・使う経済圏が独立展示会になった。電力→熱の入口。センターで業界全体の見取り図を先に取る。</p>
+    <p class="ask">再エネ余剰を熱に変換して需要家に売る事業モデルの国内事例。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">東芝 ／ BOEジャパン（BIPV WORLD）</span><span class="zone">PV EXPO 周辺</span></div>
+    <div class="body"><p class="why">ペロブスカイトなど次世代デバイス。2035年前後のリパワリングがシリコン一択でなくなる可能性を実物で確認。</p>
+    <p class="ask">野立て向けの量産・耐候性の見通し。実案件の時期。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">Won Kwang S&amp;T（PVリサイクル）</span><span class="zone">PV EXPO</span></div>
+    <div class="body"><p class="why">2035年前後のパネル大量廃棄は算数で確定した未来。東北30サイト分の実務を持つ会社は、処理を頼む側からサービス側に回れる。</p>
+    <p class="ask">日本での処理体制・提携先。地域拠点を持つ事業者との組み方。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+
+  <div class="co"><input class="chk" type="checkbox" aria-label="済">
+    <div class="top"><span class="name">FUSION POWER WORLD（京都フュージョニアリング等）</span><span class="zone">特別企画</span></div>
+    <div class="body"><p class="why">2040年代の電源構成と価格前提の材料。15分だけ。事業判断には使わない。</p>
+    <p class="ask">いつ頃・どの程度の感触だけ。</p></div>
+    <div class="booth"><label>小間</label><input inputmode="text" placeholder="例 5-32"></div>
+  </div>
+</section>
+
+<p class="caveat">
+  チェックと小間番号はページを閉じると消えます。名刺の裏に写すか、スクショで残してください。<br>
+  Orchestratorの「意図的に余剰を作る」戦略の物理メカニズムは、会場では解けません。おきたま新電力へのヒアリングで確認する項目です。
+</p>
+
+<div class="count"><span id="done">0 社 済</span><span id="total"></span></div>
+
+<script>
+(function(){
+  var secs=document.querySelectorAll('section');
+  var btns=document.querySelectorAll('nav button');
+  var cos=document.querySelectorAll('.co');
+  var doneEl=document.getElementById('done');
+  document.getElementById('total').textContent='全 '+cos.length+' 件';
+
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=b.getAttribute('data-f');
+      btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+      secs.forEach(function(s){
+        s.classList.toggle('hidden', f!=='all' && s.getAttribute('data-f')!==f);
+      });
+      window.scrollTo({top:0});
+    });
+  });
+
+  function recount(){
+    var n=0;
+    cos.forEach(function(c){ if(c.querySelector('.chk').checked){n++;c.classList.add('done');}else{c.classList.remove('done');} });
+    doneEl.textContent=n+' 社 済';
+  }
+  document.querySelectorAll('.chk').forEach(function(c){c.addEventListener('change',recount);});
+})();
+</script>
+</body>
+</html>
